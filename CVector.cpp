@@ -1,4 +1,4 @@
-// CVector.cpp: определяет точку входа для консольного приложения.
+// CVector.cpp: РѕРїСЂРµРґРµР»СЏРµС‚ С‚РѕС‡РєСѓ РІС…РѕРґР° РґР»СЏ РєРѕРЅСЃРѕР»СЊРЅРѕРіРѕ РїСЂРёР»РѕР¶РµРЅРёСЏ.
 //
 
 #include "stdafx.h"
@@ -43,7 +43,7 @@ public:
 	//////////
 	template <typename A>
 	friend CVector<A>& operator-(CVector<A>&, CVector<A>&);
-	template <typename D>
+	template <typename A>
 	friend CVector<A>& operator-(CVector<A>&, A);
 	/////////////
 	template <typename A>
@@ -137,7 +137,7 @@ bool operator==(const CVector<A>& a, const CVector<A>& b)
 template<typename A>
 ostream & operator<<(ostream & stream, CVector<A>& V)
 {
-	// TODO: вставьте здесь оператор return
+	// TODO: РІСЃС‚Р°РІСЊС‚Рµ Р·РґРµСЃСЊ РѕРїРµСЂР°С‚РѕСЂ return
 	stream << "\nVector{" << V.VectorSize << "] at " << V.Data << "=";
 	for (int i = 0; i < V.VectorSize; i++)
 		stream << V.Data[i] << ' ';
@@ -148,7 +148,7 @@ ostream & operator<<(ostream & stream, CVector<A>& V)
 template<typename A>
 istream & operator>>(istream & stream, CVector<A>& V)
 {
-	// TODO: вставьте здесь оператор return
+	// TODO: РІСЃС‚Р°РІСЊС‚Рµ Р·РґРµСЃСЊ РѕРїРµСЂР°С‚РѕСЂ return
 	cout << endl << "Input vector (" << V.VectorSize << ") " << endl;
 	for (int i = 0; i < V.VectorSize; i++)
 		stream >> V.Data[i];
@@ -159,21 +159,23 @@ istream & operator>>(istream & stream, CVector<A>& V)
 template<typename A>
 CVector<A>& operator+(CVector<A>& a, CVector<A>& b)
 {
-	// TODO: вставьте здесь оператор return
+	// TODO: РІСЃС‚Р°РІСЊС‚Рµ Р·РґРµСЃСЊ РѕРїРµСЂР°С‚РѕСЂ return
 	if (a.VectorSize != b.VectorSize)
-		throw 1;
-	CVector<A> v(a.VectorSize);
-	for (int i = 0; i < v.VectorSize; i++)
 	{
-		v.Data[i] = a.Data[i] + b.Data[i];
+		cout << "Vectors got different size...can't add them...";
+		return  a;
 	}
-	return v;
+	for (int i = 0; i < a.VectorSize; i++)
+	{
+		a.Data[i] += b.Data[i];
+	}
+	return a;
 }
 
 template<typename A>
 CVector<A>& operator+(CVector<A>& a, A b)
 {
-	// TODO: вставьте здесь оператор return
+	// TODO: РІСЃС‚Р°РІСЊС‚Рµ Р·РґРµСЃСЊ РѕРїРµСЂР°С‚РѕСЂ return
 	for (int i = 0; i < a.VectorSize; i++)
 		a.Data[i] += b;
 	return a;
@@ -182,7 +184,7 @@ CVector<A>& operator+(CVector<A>& a, A b)
 template<typename A>
 CVector<A>& operator+(A b, CVector<A>& a)
 {
-	// TODO: вставьте здесь оператор return
+	// TODO: РІСЃС‚Р°РІСЊС‚Рµ Р·РґРµСЃСЊ РѕРїРµСЂР°С‚РѕСЂ return
 	for (int i = 0; i < a.VectorSize; i++)
 		a.Data[i] += b;
 	return a;
@@ -192,7 +194,7 @@ template<typename A>
 CVector<A>& operator*(CVector<A>& a, CVector<A>& b)
 { 
 	CVector<A> v(a.VectorSize);
-	// TODO: вставьте здесь оператор return
+	// TODO: РІСЃС‚Р°РІСЊС‚Рµ Р·РґРµСЃСЊ РѕРїРµСЂР°С‚РѕСЂ return
 	for (int i = 0; i < v.VectorSize; i++)
 		v.Data[i] = a.Data[i] * b.Data[i];
 	return v;
@@ -201,7 +203,7 @@ CVector<A>& operator*(CVector<A>& a, CVector<A>& b)
 template<typename A>
 CVector<A>& operator*(CVector<A>& a, A b)
 {
-	// TODO: вставьте здесь оператор return
+	// TODO: РІСЃС‚Р°РІСЊС‚Рµ Р·РґРµСЃСЊ РѕРїРµСЂР°С‚РѕСЂ return
 	for (int i = 0; i < a.VectorSize; i++)
 		a.Data[i] = a.Data[i] * b;
 	return a;
@@ -210,7 +212,7 @@ CVector<A>& operator*(CVector<A>& a, A b)
 template<typename A>
 CVector<A>& operator*(A b, CVector<A>& a)
 {
-	// TODO: вставьте здесь оператор return
+	// TODO: РІСЃС‚Р°РІСЊС‚Рµ Р·РґРµСЃСЊ РѕРїРµСЂР°С‚РѕСЂ return
 	for (int i = 0; i < a.VectorSize; i++)
 		a.Data[i] = a.Data[i] * b;
 	return a;
@@ -219,16 +221,16 @@ CVector<A>& operator*(A b, CVector<A>& a)
 template<typename A>
 CVector<A>& operator-(CVector<A>& a, CVector<A>& b)
 {
-	// TODO: вставьте здесь оператор return
+	// TODO: РІСЃС‚Р°РІСЊС‚Рµ Р·РґРµСЃСЊ РѕРїРµСЂР°С‚РѕСЂ return
 	for (int i = 0; i < a.VectorSize; i++)
 		a.Data[i] -= b.Data[i];
 	return a;
 }
 
 template<typename A>
-CVector<A>& operator-(CVector<A>&, A d)
+CVector<A>& operator-(CVector<A>& a, A d)
 {
-	// TODO: вставьте здесь оператор return
+	// TODO: РІСЃС‚Р°РІСЊС‚Рµ Р·РґРµСЃСЊ РѕРїРµСЂР°С‚РѕСЂ return
 	for (int i = 0; i < a.VectorSize; i++)
 		a.Data[i] -= d;
 	return a;
@@ -237,7 +239,7 @@ CVector<A>& operator-(CVector<A>&, A d)
 template<typename A>
 CVector<A>& operator/(CVector<A>& a, CVector<A>& b)
 {
-	// TODO: вставьте здесь оператор return
+	// TODO: РІСЃС‚Р°РІСЊС‚Рµ Р·РґРµСЃСЊ РѕРїРµСЂР°С‚РѕСЂ return
 	
 	for (int i = 0; i < a.VectorSize; i++)
 		a.Data[i] = a.Data[i] / b.Data[i];
