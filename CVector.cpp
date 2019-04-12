@@ -27,7 +27,7 @@ public:
 	friend istream& operator>>(istream&, CVector<A>&);
     ///////////
 	template<typename A>
-	friend CVector<A>& operator+(CVector<A>&, CVector<A>&);
+	friend CVector<A> operator+(CVector<A>&, CVector<A>&);
 	template<typename A>
 	friend CVector<A>& operator+(CVector<A>&, A);
 	template<typename A>
@@ -55,33 +55,41 @@ public:
 
 
 template<typename A>
-CVector<A>& operator+(CVector<A>& a, CVector<A>& b)
+CVector<A> operator+(CVector<A>& a, CVector<A>& b)
 {
+
 	try {
 
-		if (a.VectorSize == b.VectorSize)
+		if (a.VectorSize != b.VectorSize)
 		{
-
+			throw 223;
+		}
+		else
+		{
+			CVector<A> ex(a.VectorSize);
+			
 			for (int i = 0; i < a.VectorSize; i++)
 			{
-				a.Data[i] += b.Data[i];
+				ex.Data[i] = a.Data[i] + b.Data[i];
 			}
-			return a;
+			return ex;
 		}
 	}
-	catch (...)
+	catch (int i)
 	{
-		cout << "Vse ploho";
+		cout << "Ошибка: " << i << "Problema s dlinnoi";
+		return a;
 	}
 
-	return a;
+	
 }
 
 template<class A>
 CVector<A>::CVector()
 {
-	Data = nullptr;
 	VectorSize = 0;
+	Data = nullptr;
+	
 	cout << "\nDefault Construct";
 }
 
@@ -251,12 +259,12 @@ CVector<A>& operator/(CVector<A>& a, CVector<A>& b)
 
 int main()
 {
-	CVector<int> a(3);
+	CVector<int> a(2);
 	CVector<int> b(2);
 	cin >> a >> b;
-	//CVector<int> d = a;
+	CVector<int> d = a;
 	CVector<int> e = a + b;
-	//CVector<int> p = a - b;
+	CVector<int> p = a - b;
 	
 	cout << a<<e ;
 
