@@ -76,10 +76,10 @@ template<class A>
 CVector<A>::CVector(const CVector &v)
 {
 	cout << "Copy Construct";
-	this.VectorSize = v.VectorSize;
-	Data = new A[size];
-	for (int i = 0; i < this.size; i++) {
-		this.Data[i] = v.Data[i];
+	VectorSize = v.VectorSize;
+	Data = new A[VectorSize];
+	for (int i = 0; i < VectorSize; i++) {
+		Data[i] = v.Data[i];
 	}
 }
 
@@ -150,18 +150,25 @@ istream & operator>>(istream & stream, CVector<A>& V)
 template<typename A>
 CVector<A>& operator+(CVector<A>& a, CVector<A>& b)
 {
-	// TODO: вставьте здесь оператор return
-	if (a.VectorSize != b.VectorSize)
-	{
-		cout << "Vectors got different size...can't add them...";
-		return  a;
+	CVector<A> o;
+	try {
+
+	if (a.VectorSize == b.VectorSize)
+		{
+
+			for (int i = 0; i < a.VectorSize; i++)
+			{
+				a.Data[i] += b.Data[i];
+			}
+			return a;
+		}
 	}
-	CVector<A> v(a.VectorSize);
-	for (int i = 0; i < v.VectorSize; i++)
+	catch (...)
 	{
-		v.Data[i] =a.Data[i] + b.Data[i];
+		cout << "Vse ploho";
 	}
-	return v;
+
+	return o;
 }
 
 template<typename A>
@@ -241,12 +248,14 @@ CVector<A>& operator/(CVector<A>& a, CVector<A>& b)
 
 int main()
 {
-	CVector<int> a(3), b(2), c;
-	CVector<int> d = a;
-	CVector<int> e = a + b;
-	CVector<int> p = a - 4;
+	CVector<int> a(3);
+	CVector<int> b(2);
 	cin >> a >> b;
-	cout << a / b;
+	//CVector<int> d = a;
+	CVector<int> e = a + b;
+	//CVector<int> p = a - b;
+	
+	cout << a<<e ;
 
 	system("pause");
 }
