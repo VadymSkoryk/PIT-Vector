@@ -4,7 +4,6 @@
 #include "stdafx.h"
 #include <iostream>
 using namespace std;
-
 template<class A>
 class CVector
 {
@@ -14,7 +13,7 @@ private:
 public:
 	CVector();
 	CVector(int newSize);
-	CVector(CVector &v);
+	CVector(const CVector &v);
 	~CVector();
 	////////////
 
@@ -55,18 +54,6 @@ public:
 };
 
 
-int main()
-{
-	CVector<int> a(3), b(2), c;
-	CVector<int> d = a;
-	CVector<int> e = a + b;
-	CVector<int> p = a - 4;
-	cin >> a>>b;
-	cout<<a/b;
-
-	system("pause");
-}
-
 template<class A>
 CVector<A>::CVector()
 {
@@ -86,10 +73,14 @@ CVector<A>::CVector(int newSize)
 }
 
 template<class A>
-CVector<A>::CVector(CVector & v)
+CVector<A>::CVector(const CVector &v)
 {
-	*this = v;
-	cout << "\n Copy Construct";
+	cout << "Copy Construct";
+	this.VectorSize = v.VectorSize;
+	Data = new A[size];
+	for (int i = 0; i < this.size; i++) {
+		this.Data[i] = v.Data[i];
+	}
 }
 
 template<class A>
@@ -165,11 +156,12 @@ CVector<A>& operator+(CVector<A>& a, CVector<A>& b)
 		cout << "Vectors got different size...can't add them...";
 		return  a;
 	}
-	for (int i = 0; i < a.VectorSize; i++)
+	CVector<A> v(a.VectorSize);
+	for (int i = 0; i < v.VectorSize; i++)
 	{
-		a.Data[i] += b.Data[i];
+		v.Data[i] =a.Data[i] + b.Data[i];
 	}
-	return a;
+	return v;
 }
 
 template<typename A>
@@ -244,4 +236,17 @@ CVector<A>& operator/(CVector<A>& a, CVector<A>& b)
 	for (int i = 0; i < a.VectorSize; i++)
 		a.Data[i] = a.Data[i] / b.Data[i];
 	return a;
+}
+
+
+int main()
+{
+	CVector<int> a(3), b(2), c;
+	CVector<int> d = a;
+	CVector<int> e = a + b;
+	CVector<int> p = a - 4;
+	cin >> a >> b;
+	cout << a / b;
+
+	system("pause");
 }
