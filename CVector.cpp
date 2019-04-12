@@ -54,6 +54,29 @@ public:
 };
 
 
+template<typename A>
+CVector<A>& operator+(CVector<A>& a, CVector<A>& b)
+{
+	try {
+
+		if (a.VectorSize == b.VectorSize)
+		{
+
+			for (int i = 0; i < a.VectorSize; i++)
+			{
+				a.Data[i] += b.Data[i];
+			}
+			return a;
+		}
+	}
+	catch (...)
+	{
+		cout << "Vse ploho";
+	}
+
+	return a;
+}
+
 template<class A>
 CVector<A>::CVector()
 {
@@ -110,6 +133,8 @@ void CVector<A>::operator=(const CVector & b)
 		Data[i] = b.Data[i];
 }
 
+
+
 template<typename A>
 bool operator==(const CVector<A>& a, const CVector<A>& b)
 {
@@ -147,29 +172,7 @@ istream & operator>>(istream & stream, CVector<A>& V)
 
 }
 
-template<typename A>
-CVector<A>& operator+(CVector<A>& a, CVector<A>& b)
-{
-	CVector<A> o;
-	try {
 
-	if (a.VectorSize == b.VectorSize)
-		{
-
-			for (int i = 0; i < a.VectorSize; i++)
-			{
-				a.Data[i] += b.Data[i];
-			}
-			return a;
-		}
-	}
-	catch (...)
-	{
-		cout << "Vse ploho";
-	}
-
-	return o;
-}
 
 template<typename A>
 CVector<A>& operator+(CVector<A>& a, A b)
